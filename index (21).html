@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welthros | Beta Access</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --dark-gold: #996515;
+            --bg: #0a0a0c;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body { 
+            background-color: var(--bg); 
+            color: white; 
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.squarespace-cdn.com/content/v1/59a2574903596e3462d0bd19/1721866287938-PVW9P4AWFPF2VK3REPB6/Schermata-2023-10-11-alle-10.27.43-1400x758.png?format=1500w');
+            background-size: contain;
+            background-position: center center;
+            background-repeat: no-repeat;
+            opacity: 0.12;
+            filter: blur(2px);
+            z-index: 0;
+            pointer-events: none;
+            animation: subtlePulse 8s ease-in-out infinite;
+        }
+        
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(10, 10, 12, 0.4) 50%, rgba(10, 10, 12, 0.8) 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        @keyframes subtlePulse {
+            0%, 100% { 
+                opacity: 0.12;
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 0.18;
+                transform: scale(1.02);
+            }
+        }
+        
+        body > * {
+            position: relative;
+            z-index: 1;
+        }
+        h1, h2, .gold-text { font-family: 'Cinzel', serif; color: var(--gold); }
+        
+        /* Fade-in animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Navbar scroll effect */
+        nav {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 12, 0.8);
+        }
+        
+        nav.scrolled {
+            background: rgba(10, 10, 12, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Parallax effect */
+        .parallax {
+            transition: transform 0.1s ease-out;
+        }
+        
+        /* Enhanced shadows */
+        .depth-shadow {
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5),
+                        0 0 20px rgba(212, 175, 55, 0.1);
+        }
+        
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Smooth section transitions */
+        section {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Enhanced hover effects */
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* Text glow effect */
+        .text-glow {
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5),
+                         0 0 40px rgba(212, 175, 55, 0.3);
+        }
+        
+        /* Loading animation */
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+        
+        .shimmer {
+            background: linear-gradient(90deg, 
+                rgba(255, 255, 255, 0) 0%, 
+                rgba(255, 255, 255, 0.1) 50%, 
+                rgba(255, 255, 255, 0) 100%);
+            background-size: 1000px 100%;
+            animation: shimmer 2s infinite;
+        }
+        
+        /* Enhanced video container */
+        .video-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+        
+        .video-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, 
+                rgba(212, 175, 55, 0.1) 0%, 
+                transparent 50%, 
+                rgba(255, 69, 0, 0.1) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        /* Particle effect background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 12s infinite;
+            box-shadow: 0 0 6px currentColor;
+        }
+        
+        .particle.small {
+            width: 3px;
+            height: 3px;
+            background: rgba(255, 215, 0, 0.8);
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.9);
+        }
+        
+        .particle.medium {
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 140, 0, 0.7);
+            box-shadow: 0 0 12px rgba(255, 140, 0, 0.8);
+        }
+        
+        .particle.large {
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 69, 0, 0.6);
+            box-shadow: 0 0 16px rgba(255, 69, 0, 0.7);
+        }
+        
+        .particle.xlarge {
+            width: 12px;
+            height: 12px;
+            background: rgba(212, 175, 55, 0.5);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0) scale(0.5);
+                opacity: 0;
+            }
+            5% {
+                opacity: 1;
+            }
+            95% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(calc(var(--drift) * 1px)) scale(1.2);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes float-fast {
+            0% {
+                transform: translateY(100vh) translateX(0) scale(0.5);
+                opacity: 0;
+            }
+            3% {
+                opacity: 1;
+            }
+            97% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(calc(var(--drift) * 1px)) scale(1.2);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes float-slow {
+            0% {
+                transform: translateY(100vh) translateX(0) scale(0.5);
+                opacity: 0;
+            }
+            8% {
+                opacity: 1;
+            }
+            92% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(calc(var(--drift) * 1px)) scale(1.2);
+                opacity: 0;
+            }
+        }
+        
+        /* Navbar Banner Text */
+        .banner-icon {
+            font-size: 20px;
+            color: #ffd700;
+            animation: pulse-icon 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));
+        }
+        
+        @keyframes pulse-icon {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+        
+        .banner-text {
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: #ffd700;
+            text-shadow: 
+                0 0 10px rgba(255, 215, 0, 0.8),
+                0 0 20px rgba(255, 215, 0, 0.6),
+                0 0 30px rgba(255, 215, 0, 0.4),
+                0 0 40px rgba(255, 140, 0, 0.3);
+            white-space: nowrap;
+            position: relative;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(255, 69, 0, 0.1));
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .banner-text::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 215, 0, 0.4), 
+                rgba(255, 140, 0, 0.4),
+                rgba(255, 215, 0, 0.4),
+                transparent);
+            animation: shimmer-text 3s infinite;
+            z-index: -1;
+        }
+        
+        @keyframes shimmer-text {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        @media (max-width: 1024px) {
+            .banner-text {
+                font-size: 14px;
+                letter-spacing: 2px;
+                padding: 6px 16px;
+            }
+            .banner-icon {
+                font-size: 18px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav .flex.items-center.gap-4 {
+                display: none;
+            }
+        }
+        
+        /* Hız 10 saniyeye düşürüldü */
+        .slider-wrapper {
+            display: flex;
+            width: fit-content;
+            animation: scroll 10s linear infinite;
+        }
+        .slider-wrapper:hover { animation-play-state: paused; }
+        
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .slide-img {
+            width: 500px;
+            height: 280px;
+            object-fit: cover;
+            margin: 0 15px;
+            border: 2px solid var(--dark-gold);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .slide-img:hover { 
+            transform: scale(1.08) translateY(-5px); 
+            border-color: var(--gold);
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.5),
+                        0 0 30px rgba(212, 175, 55, 0.3);
+            z-index: 10;
+        }
+        
+        .gold-button {
+            background: linear-gradient(45deg, var(--dark-gold), var(--gold));
+            box-shadow: 0 0 20px rgba(153, 101, 21, 0.4);
+            transition: all 0.3s;
+        }
+        .gold-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
+        }
+        
+        .download-btn {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 69, 0, 0.1));
+            border: 2px solid #ffd700;
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .download-btn .icon-sword {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 24px;
+            height: 24px;
+            filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.8));
+            animation: swordGlow 2s ease-in-out infinite;
+            z-index: 10;
+        }
+        
+        .download-btn:hover .icon-sword,
+        .download-btn:active .icon-sword,
+        .download-btn:focus .icon-sword {
+            filter: drop-shadow(0 0 10px rgba(255, 69, 0, 1));
+        }
+        
+        .download-btn:hover .icon-sword path,
+        .download-btn:hover .icon-sword line,
+        .download-btn:hover .icon-sword circle,
+        .download-btn:active .icon-sword path,
+        .download-btn:active .icon-sword line,
+        .download-btn:active .icon-sword circle,
+        .download-btn:focus .icon-sword path,
+        .download-btn:focus .icon-sword line,
+        .download-btn:focus .icon-sword circle {
+            fill: #ff4500;
+            stroke: #ff4500;
+        }
+        
+        @keyframes swordGlow {
+            0%, 100% { 
+                transform: rotate(-8deg) scale(1);
+                opacity: 0.9;
+            }
+            50% { 
+                transform: rotate(8deg) scale(1.15);
+                opacity: 1;
+            }
+        }
+        
+        .download-btn:hover,
+        .download-btn:active,
+        .download-btn:focus {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 69, 0, 0.3));
+            border-color: #ff4500 !important;
+            color: #ff4500 !important;
+            text-shadow: 0 0 15px rgba(255, 69, 0, 0.8);
+            box-shadow: 0 0 20px rgba(255, 69, 0, 0.4);
+            transform: translateY(-2px);
+            outline: none;
+        }
+        
+        /* Hero Decorative Elements */
+        .hero-decoration {
+            position: absolute;
+            z-index: 5;
+            opacity: 0.6;
+            filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.5));
+            animation: float-decoration 6s ease-in-out infinite;
+        }
+        
+        .hero-decoration.left {
+            left: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .hero-decoration.right {
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%) scaleX(-1);
+        }
+        
+        @keyframes float-decoration {
+            0%, 100% {
+                transform: translateY(-50%) translateY(0);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-50%) translateY(-20px);
+                opacity: 0.8;
+            }
+        }
+        
+        .decoration-sword {
+            width: 120px;
+            height: 120px;
+        }
+        
+        .decoration-shield {
+            width: 100px;
+            height: 100px;
+        }
+        
+        .decoration-rune {
+            width: 80px;
+            height: 80px;
+            animation: rotate-rune 20s linear infinite;
+        }
+        
+        @keyframes rotate-rune {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 1024px) {
+            .hero-decoration {
+                opacity: 0.4;
+            }
+            .decoration-sword {
+                width: 80px;
+                height: 80px;
+            }
+            .decoration-shield {
+                width: 70px;
+                height: 70px;
+            }
+            .decoration-rune {
+                width: 60px;
+                height: 60px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-decoration {
+                display: none;
+            }
+        }
+        
+        /* Version Selection Modal */
+        .version-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .version-modal.active {
+            display: flex;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .version-modal-content {
+            background: linear-gradient(135deg, rgba(10, 10, 12, 0.95), rgba(20, 20, 25, 0.95));
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.2);
+            animation: slideUp 0.3s ease;
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: transparent;
+            border: none;
+            color: #ffd700;
+            font-size: 24px;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .modal-close:hover {
+            background: rgba(255, 215, 0, 0.1);
+            transform: rotate(90deg);
+        }
+        
+        .modal-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 10px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .modal-subtitle {
+            color: #999;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .version-option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .version-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(212, 175, 55, 0.5);
+            transform: translateX(5px);
+        }
+        
+        .version-option.new-version {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(212, 175, 55, 0.6);
+        }
+        
+        .version-option.old-version {
+            background: rgba(0, 0, 0, 0.3);
+            border-color: rgba(212, 175, 55, 0.2);
+        }
+        
+        .version-info {
+            flex: 1;
+        }
+        
+        .version-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 5px;
+        }
+        
+        .version-details {
+            font-size: 14px;
+            color: #999;
+        }
+        
+        .version-icon {
+            font-size: 24px;
+            color: #ffd700;
+            margin-left: 15px;
+        }
+        
+        /* Thanks Message */
+        .thanks-message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.5);
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.95), rgba(255, 69, 0, 0.95));
+            color: #0a0a0c;
+            padding: 30px 60px;
+            border-radius: 12px;
+            font-size: 32px;
+            font-weight: bold;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.1em;
+            z-index: 2000;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.8),
+                        0 0 100px rgba(255, 69, 0, 0.6);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .thanks-message.show {
+            display: block;
+            animation: thanksAnimation 2.5s ease-out forwards;
+        }
+        
+        @keyframes thanksAnimation {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+            15% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+            25% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            85% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.9);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar" class="p-6 flex justify-between items-center max-w-7xl mx-auto border-b border-gold/20 fixed top-0 left-0 right-0 z-50">
+        <div class="text-2xl font-bold gold-text tracking-widest text-glow">WELTHROS</div>
+        <div class="flex items-center gap-4 flex-1 justify-center mx-8">
+            <i class="fas fa-star banner-icon"></i>
+            <span class="banner-text">BETA ACCESS NOW AVAILABLE</span>
+            <i class="fas fa-star banner-icon" style="animation-delay: 0.5s;"></i>
+        </div>
+        <div class="space-x-8 uppercase text-xs tracking-widest font-bold items-center flex">
+            <a href="#media" class="hover:text-gold transition hidden md:block relative group">
+                Gallery
+                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#beta" class="gold-button text-black px-6 py-2 rounded-sm hover-lift">JOIN BETA</a>
+        </div>
+    </nav>
+
+    <div class="h-20"></div> <!-- Navbar spacer -->
+    
+    <section class="relative h-[75vh] flex items-center justify-center text-center px-4 fade-in">
+        <div class="absolute inset-0 bg-[url('https://cdn.akamai.steamstatic.com/steam/apps/1760330/ss_4966967f40d39e803a62f831326402431792f94c.1920x1080.jpg')] bg-cover bg-center opacity-30 parallax"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0c] via-transparent to-transparent"></div>
+        
+        <!-- Left Decorative Elements -->
+        <div class="hero-decoration left">
+            <svg class="decoration-sword" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 10L45 20L50 30L55 20L50 10Z" fill="#ffd700" stroke="#ff4500" stroke-width="1"/>
+                <rect x="48" y="30" width="4" height="50" fill="#ffd700" stroke="#ff4500" stroke-width="0.5"/>
+                <path d="M45 80L50 90L55 80L50 85L45 80Z" fill="#ff4500" stroke="#ffd700" stroke-width="1"/>
+                <circle cx="50" cy="50" r="2" fill="#ff4500"/>
+            </svg>
+        </div>
+        <div class="hero-decoration left" style="top: 30%; animation-delay: 1s;">
+            <svg class="decoration-rune" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="35" stroke="#ffd700" stroke-width="2" fill="none" opacity="0.5"/>
+                <path d="M50 20L60 40L80 45L65 60L70 80L50 70L30 80L35 60L20 45L40 40L50 20Z" fill="#ffd700" opacity="0.6" stroke="#ff4500" stroke-width="1"/>
+                <circle cx="50" cy="50" r="8" fill="#ff4500" opacity="0.8"/>
+            </svg>
+        </div>
+        
+        <!-- Right Decorative Elements -->
+        <div class="hero-decoration right">
+            <svg class="decoration-shield" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 10C40 10 30 15 25 25C20 35 25 50 30 60C35 70 40 80 45 85C47.5 87.5 50 90 50 90C50 90 52.5 87.5 55 85C60 80 65 70 70 60C75 50 80 35 75 25C70 15 60 10 50 10Z" fill="#ffd700" opacity="0.4" stroke="#ff4500" stroke-width="2"/>
+                <path d="M50 30L45 40L50 50L55 40L50 30Z" fill="#ff4500" stroke="#ffd700" stroke-width="1"/>
+                <line x1="50" y1="20" x2="50" y2="60" stroke="#ff4500" stroke-width="1.5"/>
+            </svg>
+        </div>
+        <div class="hero-decoration right" style="top: 25%; animation-delay: 1.5s;">
+            <svg class="decoration-rune" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 15L60 30L80 35L70 50L75 70L50 65L25 70L30 50L20 35L40 30L50 15Z" fill="#ffd700" opacity="0.5" stroke="#ff4500" stroke-width="2"/>
+                <circle cx="50" cy="50" r="20" stroke="#ffd700" stroke-width="1.5" fill="none" opacity="0.4"/>
+                <circle cx="50" cy="50" r="5" fill="#ff4500"/>
+            </svg>
+        </div>
+        
+        <div class="relative z-10">
+            <span class="text-gold tracking-[0.4em] uppercase text-sm mb-4 block fade-in" style="transition-delay: 0.2s;">A Dark Fantasy Metroidvania</span>
+            <h1 class="text-5xl md:text-8xl font-black mb-4 text-glow fade-in" style="transition-delay: 0.4s;">WELTHROS</h1>
+            <p class="text-gray-400 max-w-2xl mx-auto text-lg mb-8 italic fade-in" style="transition-delay: 0.6s;">
+                Choose your God: Light or Gold? Explore the cursed world of Welthros in this epic pixel-art adventure.
+            </p>
+            <div class="flex justify-center gap-4 fade-in" style="transition-delay: 0.8s;">
+                <a href="#beta" class="download-btn px-8 py-3 uppercase font-bold tracking-widest text-sm hover-lift">
+                    <svg class="icon-sword" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.5 2L15 4.5L19.5 9L22 6.5L17.5 2Z" fill="#ffd700" stroke="#ffd700" stroke-width="0.5"/>
+                        <path d="M2 22L4.5 19.5L9 19.5L6.5 17L2 22Z" fill="#ffd700" stroke="#ffd700" stroke-width="0.5"/>
+                        <line x1="4.5" y1="19.5" x2="19.5" y2="4.5" stroke="#ffd700" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="12" cy="12" r="1.5" fill="#ffd700"/>
+                    </svg>
+                    DOWNLOAD
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="media" class="py-20 bg-black/40 overflow-hidden">
+        <h2 class="text-center text-3xl mb-12 uppercase tracking-[0.5em] fade-in">Glimpse into Chaos</h2>
+        <div class="slider-container relative">
+            <div class="slider-wrapper">
+                <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1760330/ss_e7d92e5d0f1b8656666f36f2f6df68251f556d5a.1920x1080.jpg?t=1736514214" class="slide-img">
+                <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1760330/ss_f18cf5c8315aebfe32c62cc6d0134cb9dfc47c1a.1920x1080.jpg?t=1736514214" class="slide-img">
+                <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1760330/ss_d38414594ec14bbeb91339910b8784d5a257b6ab.1920x1080.jpg?t=1736514214" class="slide-img">
+                <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1760330/ss_a06f3290f7547fd8039035e9dcd9fb85fed8bec9.1920x1080.jpg?t=1736514214" class="slide-img">
+                <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1760330/ss_2221979251d2cc7f81eaff170fc3096514a501be.1920x1080.jpg?t=1736514214" class="slide-img">
+                <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1760330/ss_96c1df2ea9e5fd481dc1fabd01b1325adb9a664e.1920x1080.jpg?t=1736514214" class="slide-img">
+                <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1760330/ss_34014795f05333c105bec02cfd71b05a84e44efd.1920x1080.jpg?t=1736514214" class="slide-img">
+                <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1760330/ss_82d58d99950c73dc1e05f639974b50ac10480b62.1920x1080.jpg?t=1736514214" class="slide-img">
+                <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1760330/ss_e7d92e5d0f1b8656666f36f2f6df68251f556d5a.1920x1080.jpg?t=1736514214" class="slide-img">
+                <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1760330/ss_f18cf5c8315aebfe32c62cc6d0134cb9dfc47c1a.1920x1080.jpg?t=1736514214" class="slide-img">
+                <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1760330/ss_d38414594ec14bbeb91339910b8784d5a257b6ab.1920x1080.jpg?t=1736514214" class="slide-img">
+                <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1760330/ss_a06f3290f7547fd8039035e9dcd9fb85fed8bec9.1920x1080.jpg?t=1736514214" class="slide-img">
+                <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1760330/ss_2221979251d2cc7f81eaff170fc3096514a501be.1920x1080.jpg?t=1736514214" class="slide-img">
+                <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1760330/ss_96c1df2ea9e5fd481dc1fabd01b1325adb9a664e.1920x1080.jpg?t=1736514214" class="slide-img">
+                <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1760330/ss_34014795f05333c105bec02cfd71b05a84e44efd.1920x1080.jpg?t=1736514214" class="slide-img">
+                <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1760330/ss_82d58d99950c73dc1e05f639974b50ac10480b62.1920x1080.jpg?t=1736514214" class="slide-img">
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-4 max-w-5xl mx-auto">
+        <h2 class="text-center text-3xl mb-12 uppercase tracking-widest fade-in">Gameplay Preview</h2>
+        <div class="video-container border-2 border-gold/30 rounded-xl overflow-hidden depth-shadow hover-lift fade-in" style="transition-delay: 0.2s;">
+            <video class="w-full" autoplay loop muted playsinline>
+                <source src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1760330/extras/a070d3097936a6c18048798ad4972ad3.webm?t=1736514214" type="video/webm">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <p class="text-center mt-6 text-gray-500 text-sm fade-in" style="transition-delay: 0.4s;">Footage represents work-in-progress beta version.</p>
+    </section>
+
+    <section id="beta" class="py-24 bg-gradient-to-b from-black to-gold/10 px-4 text-center">
+        <div class="max-w-2xl mx-auto border border-gold/20 p-12 rounded-lg glass depth-shadow hover-lift fade-in">
+            <h2 class="text-4xl mb-6 text-glow">SECURE YOUR BETA ACCESS</h2>
+            <p class="mb-8 text-gray-400">Enter your beta key to download the beta build.</p>
+            <form id="betaKeyForm" class="flex flex-col gap-4" onsubmit="handleBetaKey(event)">
+                <input type="text" id="betaKeyInput" placeholder="Enter beta key" class="bg-white/5 border border-gold/30 p-4 rounded-sm focus:outline-none focus:border-gold transition text-white text-center uppercase tracking-widest" required>
+                <div id="errorMessage" class="text-red-500 text-sm hidden"></div>
+                <button type="submit" class="gold-button text-black font-bold px-10 py-4 uppercase tracking-tighter">Download Beta</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Thanks Message -->
+    <div id="thanksMessage" class="thanks-message">THANKS FOR DOWNLOAD!</div>
+
+    <!-- Version Selection Modal -->
+    <div id="versionModal" class="version-modal">
+        <div class="version-modal-content">
+            <button class="modal-close" onclick="closeVersionModal()">&times;</button>
+            <h3 class="modal-title">SELECT VERSION</h3>
+            <p class="modal-subtitle">Choose which version of Welthros you want to download.</p>
+            
+            <div class="version-option new-version" onclick="downloadVersion('new')">
+                <div class="version-info">
+                    <div class="version-name">NEW VERSION</div>
+                    <div class="version-details">V1.2.4 (Latest)</div>
+                </div>
+                <i class="fas fa-download version-icon"></i>
+            </div>
+            
+            <div class="version-option old-version" onclick="downloadVersion('old')">
+                <div class="version-info">
+                    <div class="version-name">OLD VERSION</div>
+                    <div class="version-details">V1.0.0 (Old)</div>
+                </div>
+                <i class="fas fa-history version-icon"></i>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const BETA_KEY = 'RH2025';
+        const NEW_VERSION_URL = 'https://www.dropbox.com/scl/fi/hhzrnzfjfeljctm0ge5nd/WelthrosInstaller.zip?rlkey=ragpgovsyb6gf9zbz5d7bdbew&st=0t7bd5lq&dl=1';
+        const OLD_VERSION_URL = 'https://www.dropbox.com/scl/fi/hhzrnzfjfeljctm0ge5nd/WelthrosInstaller.zip?rlkey=ragpgovsyb6gf9zbz5d7bdbew&st=50w610bo&dl=1';
+        const DISCORD_WEBHOOK_URL = 'https://canary.discord.com/api/webhooks/1456410825404453037/dzSlx339wl8t0TyS-6f-9ri4oSEHaDFefFWdGlLD1WeRbBeUC-yh8oUHXzZtRh38bQiu';
+
+        function handleBetaKey(event) {
+            event.preventDefault();
+            const input = document.getElementById('betaKeyInput');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            const enteredKey = input.value.trim().toUpperCase();
+            
+            if (enteredKey === BETA_KEY) {
+                // Doğru key - Modal'ı aç
+                errorMessage.classList.add('hidden');
+                openVersionModal();
+                input.value = '';
+            } else {
+                // Yanlış key
+                errorMessage.textContent = 'Invalid beta key. Please try again.';
+                errorMessage.classList.remove('hidden');
+                input.value = '';
+                input.focus();
+            }
+        }
+        
+        function openVersionModal() {
+            const modal = document.getElementById('versionModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Scroll'u engelle
+        }
+        
+        function closeVersionModal() {
+            const modal = document.getElementById('versionModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = ''; // Scroll'u geri aç
+        }
+        
+        // Ülke kodundan bayrak emoji'si oluştur
+        function getCountryFlag(countryCode) {
+            if (!countryCode || countryCode.length !== 2) return '';
+            const codePoints = countryCode
+                .toUpperCase()
+                .split('')
+                .map(char => 127397 + char.charCodeAt());
+            return String.fromCodePoint(...codePoints);
+        }
+        
+        // İşletim sistemi bilgisini al
+        function getOS() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const platform = navigator.platform || '';
+            
+            if (/windows/i.test(userAgent) || /win/i.test(platform)) {
+                return 'Windows';
+            } else if (/macintosh|mac os x/i.test(userAgent) || /mac/i.test(platform)) {
+                return 'macOS';
+            } else if (/linux/i.test(userAgent) || /linux/i.test(platform)) {
+                return 'Linux';
+            } else if (/android/i.test(userAgent)) {
+                return 'Android';
+            } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
+                return 'iOS';
+            } else {
+                return 'Unknown';
+            }
+        }
+        
+        // IP ve ülke bilgisini al
+        async function getIPAndCountry() {
+            try {
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                return {
+                    ip: data.ip || 'N/A',
+                    country: data.country_name || 'Unknown',
+                    countryCode: data.country_code || '',
+                    city: data.city || 'Unknown',
+                    region: data.region || 'Unknown'
+                };
+            } catch (error) {
+                console.error('Error fetching IP info:', error);
+                // Fallback: Başka bir API dene
+                try {
+                    const fallbackResponse = await fetch('https://api.ipify.org?format=json');
+                    const fallbackData = await fallbackResponse.json();
+                    return {
+                        ip: fallbackData.ip || 'N/A',
+                        country: 'Unknown',
+                        countryCode: '',
+                        city: 'Unknown',
+                        region: 'Unknown'
+                    };
+                } catch (fallbackError) {
+                    return {
+                        ip: 'N/A',
+                        country: 'Unknown',
+                        countryCode: '',
+                        city: 'Unknown',
+                        region: 'Unknown'
+                    };
+                }
+            }
+        }
+        
+        // Discord webhook'una mesaj gönder
+        async function sendToDiscord(version, ipInfo, os) {
+            if (!DISCORD_WEBHOOK_URL) {
+                console.warn('Discord webhook URL is not configured');
+                return;
+            }
+            
+            const versionName = version === 'new' ? 'NEW VERSION (V1.2.4)' : 'OLD VERSION (V1.0.0)';
+            const flag = ipInfo.countryCode ? getCountryFlag(ipInfo.countryCode) : '';
+            const countryDisplay = flag ? `${flag} ${ipInfo.country}` : ipInfo.country;
+            
+            const embed = {
+                title: '📥 New Download Detected',
+                color: version === 'new' ? 0xd4af37 : 0x666666,
+                fields: [
+                    {
+                        name: 'Version',
+                        value: versionName,
+                        inline: true
+                    },
+                    {
+                        name: 'IP Address',
+                        value: ipInfo.ip,
+                        inline: true
+                    },
+                    {
+                        name: 'Operating System',
+                        value: os,
+                        inline: true
+                    },
+                    {
+                        name: 'Location',
+                        value: `${countryDisplay}\n${ipInfo.city}, ${ipInfo.region}`,
+                        inline: false
+                    },
+                    {
+                        name: 'Timestamp',
+                        value: new Date().toLocaleString('tr-TR', { 
+                            timeZone: 'Europe/Istanbul',
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            second: '2-digit'
+                        }),
+                        inline: true
+                    }
+                ],
+                footer: {
+                    text: 'Welthros Beta Download Tracker'
+                },
+                timestamp: new Date().toISOString()
+            };
+            
+            try {
+                await fetch(DISCORD_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        embeds: [embed]
+                    })
+                });
+            } catch (error) {
+                console.error('Error sending to Discord:', error);
+            }
+        }
+        
+        async function downloadVersion(version) {
+            let downloadUrl = '';
+            
+            if (version === 'new') {
+                downloadUrl = NEW_VERSION_URL || 'https://www.dropbox.com/scl/fi/07235hw6wc9rvks7kk0nj/WelthrosInstaller.rar?rlkey=ktszhywg7bdrdf3xsxemqc5ia&st=4bsz05uv&dl=1'; // Yeni versiyon linki
+            } else if (version === 'old') {
+                downloadUrl = OLD_VERSION_URL || 'https://www.dropbox.com/scl/fi/hhzrnzfjfeljctm0ge5nd/WelthrosInstaller.zip?rlkey=ragpgovsyb6gf9zbz5d7bdbew&st=50w610bo&dl=1'; // Eski versiyon linki
+            }
+            
+            if (downloadUrl && downloadUrl !== '#') {
+                // İndirme başlat
+                const link = document.createElement('a');
+                link.href = downloadUrl;
+                link.download = '';
+                link.click();
+                
+                // Modal'ı kapat
+                closeVersionModal();
+                
+                // Thanks mesajını göster
+                showThanksMessage();
+                
+                // Discord'a bilgi gönder (asenkron olarak, indirme engellenmesin)
+                const os = getOS();
+                getIPAndCountry().then(ipInfo => {
+                    sendToDiscord(version, ipInfo, os);
+                }).catch(error => {
+                    console.error('Error getting IP info:', error);
+                    // Hata olsa bile Discord'a temel bilgileri gönder
+                    sendToDiscord(version, {
+                        ip: 'N/A',
+                        country: 'Unknown',
+                        countryCode: '',
+                        city: 'Unknown',
+                        region: 'Unknown'
+                    }, os);
+                });
+            } else {
+                alert('Download link is not configured. Please contact the administrator.');
+            }
+        }
+        
+        function showThanksMessage() {
+            const thanksMsg = document.getElementById('thanksMessage');
+            thanksMsg.classList.add('show');
+            
+            // 2.5 saniye sonra mesajı kaldır
+            setTimeout(() => {
+                thanksMsg.classList.remove('show');
+            }, 2500);
+        }
+        
+        // Modal dışına tıklandığında kapat
+        document.getElementById('versionModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeVersionModal();
+            }
+        });
+        
+        // ESC tuşu ile kapat
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeVersionModal();
+            }
+        });
+        
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all fade-in elements
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.fade-in, section').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Make hero section visible immediately
+            const heroSection = document.querySelector('section');
+            if (heroSection) {
+                heroSection.classList.add('visible');
+                heroSection.querySelectorAll('.fade-in').forEach(el => {
+                    el.classList.add('visible');
+                });
+            }
+        });
+        
+        // Navbar scroll effect
+        let lastScroll = 0;
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            // Parallax effect
+            const parallaxElements = document.querySelectorAll('.parallax');
+            parallaxElements.forEach(el => {
+                const speed = 0.5;
+                const yPos = -(currentScroll * speed);
+                el.style.transform = `translateY(${yPos}px)`;
+            });
+            
+            lastScroll = currentScroll;
+        });
+        
+        // Create particle effect
+        function createParticles() {
+            const particlesContainer = document.createElement('div');
+            particlesContainer.className = 'particles';
+            document.body.appendChild(particlesContainer);
+            
+            const particleSizes = ['small', 'medium', 'large', 'xlarge'];
+            const animationTypes = ['float', 'float-fast', 'float-slow'];
+            
+            // Create more particles with different sizes
+            for (let i = 0; i < 80; i++) {
+                const particle = document.createElement('div');
+                const size = particleSizes[Math.floor(Math.random() * particleSizes.length)];
+                const animType = animationTypes[Math.floor(Math.random() * animationTypes.length)];
+                
+                particle.className = `particle ${size}`;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 12 + 's';
+                
+                // Vary animation duration
+                let duration;
+                if (animType === 'float-fast') {
+                    duration = 8 + Math.random() * 4; // 8-12 seconds
+                } else if (animType === 'float-slow') {
+                    duration = 15 + Math.random() * 5; // 15-20 seconds
+                } else {
+                    duration = 10 + Math.random() * 6; // 10-16 seconds
+                }
+                
+                particle.style.animationDuration = duration + 's';
+                particle.style.animationName = animType;
+                
+                // Add horizontal drift
+                const drift = (Math.random() - 0.5) * 200; // -100 to 100
+                particle.style.setProperty('--drift', drift);
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        createParticles();
+    </script>
+
+    <footer class="py-10 text-center text-gray-600 text-[10px] tracking-[0.3em] uppercase">
+        Developed by Dreamhaven Studio & Welthros Team. All Rights Reserved © 2024
+    </footer>
+
+</body>
+</html>
